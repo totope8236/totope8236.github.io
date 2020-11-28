@@ -1,0 +1,62 @@
+<head>
+
+
+<style>
+    body{
+        text-align: center;
+        align-content: center;
+        background-color: #444;
+        font-family: helvetica;
+    }
+    form{
+        font-size:32px;
+    }
+    input[type=text] {
+  background-color: white;
+  color: black;
+        font-size:52px;
+        margin: 8px 10px;
+        padding: 20px;
+        border-radius: 20px;
+        
+}
+    input[type=submit] {
+        font-size:60px;
+  background-color: orangered;
+  color: white;
+  padding: 30px;
+  margin: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+</style>
+
+<script>
+    function validateForm() {
+  var x = document.forms["myForm"]["a"].value;
+        var y = document.forms["myForm"]["b"].value;
+        var z = document.forms["myForm"]["c"].value;
+  if (x == "1" && y=="2" && z=="3") {
+    // Simulate a mouse click:
+      return true
+  }else{
+      alert("Mauvaise Reponse");
+    return false;
+  }
+}
+    </script>  
+</head>
+
+<body>
+    <a style="font-size:600px">&#128274;</a>
+    
+    <form name="myForm" action="http://christophecaron.ca/piano" onsubmit="return validateForm()" method="get">
+        <input type="text" name="a" placeholder="#1..." required><br>
+        <input type="text" name="b" placeholder="#2..." required><br>
+        <input type="text" name="c" placeholder="#3..." required><br>
+        <input type="submit" value="Valider">
+</form>
+  
+
+</body>
