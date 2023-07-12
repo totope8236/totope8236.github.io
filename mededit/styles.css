@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body#main{
+   height: 100%; 
+    padding: 0;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+#main_input{
+    padding: 20px;
+    height: 100vh;
+    resize: none;
+    font-size: 12pt;
+    width: 100%;
+}
+
+#main_input.half{
+    width: 50%;
+}
+
+
+
+
+/*RIGHT-CLICK MENU*/
+#context-menu{
+    position: fixed;
+    z-index: 10000;
+    width: 150px;
+    background: #1b1a1a;
+    border-radius: 5px;
+    
+    display: none;
+}
+
+#context-menu.visible{
+    display:block;
+}
+
+#context-menu .item{
+    padding: 8px 10px;
+    font-size: 15px;
+    color: #eee;
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+#context-menu .item:hover{
+    background: #343434;
+}
+
+
+
+#toggle-button{
+    position:fixed;
+    text-align: center;
+    top: 50%;
+    right: 50%;
+    transform: translate(0%, -50%);
+    z-index: 30;
+
+    width: 50px;
+    height: 100px;
+    border-radius: 50px 0 0 50px;
+    color: white;
+    background: #222;
+    user-select: none;
+}
+
+#toggle-button.right{
+    right:0%;
+}
+
+#toggle-button:hover{
+    cursor:pointer;
+    background: #323;
+}
+
+.centered-element{
+    margin: 0;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    width:90%;
+    transform: translateY(-50%);
+}
+
+/* PDF */
+#pdf{
+    width: 50%;
+    height: 100%;
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    display: none;
+}
+
+#pdf.visible{
+    display: block;
+}

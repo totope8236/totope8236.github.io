@@ -1,0 +1,52 @@
+<html>
+<header>
+<link rel="stylesheet" href="styles.css">    
+</header>
+    
+<body id="main">   
+    <div id="context-menu">
+        <div class="item">Option 1</div>
+        <div class="item">Option 2</div>
+        <div class="item">Option 3</div>
+        <div class="item">Option 4</div>
+        <div class="item">Print</div>
+    </div>
+    
+<iframe id="pdf" class="visible"></iframe>
+    
+
+    
+<form>
+    <textarea id="main_input" class="half" onchange onkeyuponpaste oninput="save_text_to_cookie()"></textarea>
+</form>
+
+    <div id="toggle-button" onclick="toggleButton()">
+        <div class="centered-element">
+            &gt; &lt;
+        </div>
+    </div>
+
+    
+</body>
+    <script src="js/pdf-lib.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="script.js"></script>
+    
+    
+    <script>
+        //const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
+        //const {writeFileSync, readFileSync } = require("fs")
+   
+  </script>
+    
+    <script>
+    //On load, read cookie and set main input.
+const text_content = getCookie("text_field");
+        // decode URI used to put back the \n which caused interference.
+if (text_content){
+    document.getElementById("main_input").value = decodeURIComponent(text_content);
+}else{
+    document.getElementById("main_input").value = "WAS EMPTY!";
+}
+    </script>
+</html>
