@@ -1,0 +1,20 @@
+{
+  "page-template": {
+    "admission": {
+      "type": "text",
+      "value": "this is an admission"
+    },
+    "progress-note":{
+      "type": "text",
+      "value": "this is a progress note"
+    }
+  },
+  "objective": {
+    "labs": {
+      
+    },
+    "imaging":{
+      
+    }
+  }
+}
