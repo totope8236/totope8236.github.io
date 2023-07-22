@@ -1,0 +1,7 @@
+Heme: Hgb ‡; GB ‡ (neutro ‡); Plt ‡;
+
+Lytes: Na ‡; Cl ‡; K ‡; Cr ‡ (DFG ‡); U ‡;
+Ca ‡; Phos ‡; Mg ‡;
+
+Gaz Cap: pH ‡ / pCO2 ‡ / HCO3 ‡;
+Lactate: ‡

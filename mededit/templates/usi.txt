@@ -1,0 +1,37 @@
+USI - MÉDECINE INTERNE
+
+ID: ‡
+
+RESP:
+Sat ‡% sous ‡;
+Gaz Cap: pH ‡ / pCO2 ‡ / HCO3 ‡
+Lactate: ‡
+
+CARDIO:
+TA‡; FC ‡; Sinus; ‡ amines;
+
+
+NEPHRO:
+In ‡;  OUT ‡ (‡cc/hr);  NET  ‡;
+
+Lytes: Na ‡; Cl ‡; K ‡; Cr ‡ (DFG ‡); U ‡;
+Ca ‡; Phos ‡; Mg ‡;
+
+
+HEME:
+T‡C; (TMax‡C);
+Hgb ‡; GB ‡ (neutro ‡); Plt ‡; CRP ‡;
+INR ‡; PTT ‡;
+Rx: 
+
+
+GI:
+glyc: ‡;
+Échelle insuline ‡;
+
+
+NEURO:
+‡
+
+
+IMPRESSION/PLAN:

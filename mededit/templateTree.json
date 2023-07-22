@@ -1,20 +1,61 @@
 {
   "page-template": {
     "admission": {
-      "type": "text",
-      "value": "this is an admission"
+      "type": "long-text",
+      "src": "admission.txt"
     },
     "progress-note":{
-      "type": "text",
-      "value": "this is a progress note"
+      "type": "long-text",
+      "src": "progress-note.txt"
+    },
+    "USI":{
+        "type": "long-text",
+        "src": "usi.txt"
     }
   },
-  "objective": {
     "labs": {
-      
+      "all-labs":{
+          "type": "long-text",
+          "src": "all-labs.txt"
+      },
+        "Heme":{
+            "type": "short-text",
+            "value":"Heme: Hgb ‡; GB ‡ (neutro ‡); Plt ‡;\n"
+        },
+        "Lytes":{
+            "type": "short-text",
+            "value":"Lytes: Na ‡; Cl ‡; K ‡; Cr ‡ (DFG ‡); U ‡;\n"
+        },
+        "LFTs":{
+            "type": "short-text",
+            "value":"LFTs: Aφ ‡; ALT ; AST ‡; GGT ‡;\n    T-bili ‡ (conj ‡); INR ‡; Alb ‡; \n"
+        },
+        "Gaz":{
+            "type": "short-text",
+            "value": "Gaz Cap: pH ‡ / pCO2 ‡ / HCO3 ‡\nLactate: ‡"
+        }
     },
-    "imaging":{
-      
+    "rds":{
+        "type": "selector",
+        "title": "RDS",
+        "content":{
+            "General":["Øfatigue","Øfièvre/frissons","ØΔpoids"],
+            "Cardio":["ØDRS", "Øpalpitations", "Øorthopnée", "ØDPN","Ølipothymie"],
+            "Resp":["Øtoux/expecto", "Ødyspnée", "Ødouleur pleurétique"],
+            "GI":["Ønausée/vomitissement", "Ødouleur abdo", "Øconstipation/diarrhée", "Øhématochézie/méléna"],
+            "GU":["Øhématurie", "Ødysurie", "Øpolyurie"],
+            "Neuro": ["Øcéphalée","Øperte conscience","Øconvulsions","Øamaurose fugace", "Øvertiges","Øparésie/paresthésie"]
+        }
+    },
+    "O/E":{
+        "type": "selector",
+        "title": "E/P",
+        "content": {
+            "Bon état général": [],
+            "Cardio": ["B1B2Ⓝ, ØOMI"],
+            "Poumons":["BEAB, clairs"],
+            "Abdo": ["Souple, Ødouleur, Ørebond"],
+            "Neuro": ["CNII-XII N, force MS & MI grossièrement N"]
+        }
     }
-  }
 }

@@ -2,6 +2,7 @@
 
 body#main{
    height: 100%; 
+    width: 100%;
     padding: 0;
     margin: 0;
     font-family: "Open Sans", sans-serif;
@@ -46,7 +47,7 @@ body#main{
 }
 
 #context-menu .item:hover{
-    background: #343434;
+    background: #303030;
 }
 
 
@@ -86,7 +87,68 @@ body#main{
     transform: translateY(-50%);
 }
 
-/* PDF */
+
+/* SELECTOR **************************/
+#selector h3{
+    margin: 10pt;
+}
+
+#s-container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200%;
+}
+
+#s-form{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    
+    
+    padding: 20px 20px;
+    
+    z-index: 10000;
+    
+    width:auto;
+    
+    border-radius: 10px;
+    
+    background: #1b1a1a;
+    color: white;
+    
+    display:none;
+    
+    
+}
+
+#s-form.visible{
+    display:block;
+}
+
+#s-form input[type=text]{
+    margin: 0 5px;
+    background: #303030;
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 2px;
+    color: white;
+}
+#s-form input[type=submit]{
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 4px;
+    cursor: pointer;
+}
+
+
+
+/* PDF ************************/
 #pdf{
     width: 50%;
     height: 100%;

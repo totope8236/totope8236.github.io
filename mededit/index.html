@@ -12,15 +12,28 @@
         <div class="item">Print</div>
     </div>
     
-<iframe id="pdf" class="visible"></iframe>
+    
+    <div id="s-container">
+        <form id="s-form">
+            <input type="checkbox" id="general" name="general">
+            <label for="general">General:</label><input type="text" placeholder="no murmur" size="9"><input type="text"><br>
+            <input type="checkbox" id="general2" name="general">
+            <label for="general2">General:</label><br>
+            
+            <input type="submit">
+        </form>
+    </div>
+    
+    
+<iframe id="pdf" class=""></iframe>
     
 
     
 <form>
-    <textarea id="main_input" class="half" onchange onkeyuponpaste oninput="save_text_to_cookie()"></textarea>
+    <textarea id="main_input" class="" onchange onkeyuponpaste oninput="save_text_to_cookie()"></textarea>
 </form>
 
-    <div id="toggle-button" onclick="toggleButton()">
+    <div id="toggle-button" class="right" onclick="toggleButton()">
         <div class="centered-element">
             &gt; &lt;
         </div>
@@ -46,7 +59,8 @@ const text_content = getCookie("text_field");
 if (text_content){
     document.getElementById("main_input").value = decodeURIComponent(text_content);
 }else{
-    document.getElementById("main_input").value = "WAS EMPTY!";
+    // was empty, keep empty
+    document.getElementById("main_input").value = "";
 }
     </script>
 </html>

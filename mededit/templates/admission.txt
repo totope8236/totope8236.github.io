@@ -1,0 +1,33 @@
+ADMISSION - MED INTERNE
+ID: ‡
+NS: ‡
+
+ATCD:
+‡
+
+Rx:
+‡
+
+All: ‡
+HdV: Ø x3; cig x ‡; EtOH ‡; d ‡;
+
+HMA:
+‡
+
+RDS:
+‡
+
+E/P:
+TA ‡ ; FC ‡ ; FR ‡ ; Sat ‡% AA; T‡C;
+Alerte. Pas de détresse.
+
+Investigations:
+‡
+
+Impression et Plan:
+‡
+
+
+Dispo: ‡
+Anticoagulation: ‡
+PRN Rx: ‡
