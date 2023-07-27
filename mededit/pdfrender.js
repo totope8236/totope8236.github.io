@@ -100,7 +100,7 @@ const betterBreakLines = (text, size, font, maxWidth) => {
 
 async function createPdf() {
 // LOAD TEMPLATE
-  const url = './pdfs/consultation.pdf';
+  const url = './pdfs/progress.pdf';
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
   const template = await PDFLib.PDFDocument.load(existingPdfBytes);
   //const template_pages = template.getPages();
@@ -114,8 +114,8 @@ async function createPdf() {
     //await copy_document(template, pdfDoc);
     
     // FONT
-    const font = await pdfDoc.embedFont(PDFLib.StandardFonts.TimesRoman);
-    const fontSize = 12;
+    const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const fontSize = 11;
     const maxWidth = 515;
     
     /*
@@ -149,7 +149,7 @@ async function createPdf() {
     var l_index = 0;
     var p_index = 0;
     var end_index = 0;
-    var maxLines = [16, 38];
+    var maxLines = [23, 36];
     while (l_index < lines.length){
         if (p_index % 2 == 0){
             if (lines.length <= l_index+maxLines[0]){
@@ -158,12 +158,12 @@ async function createPdf() {
                 end_index = l_index+maxLines[0]
             }
             pages[p_index].drawText(lines.slice(l_index, end_index).join("\n"),{
-                x: 53,
-                                    y: 382,
+                x: 118,
+                                    y: 458,
                                     size: fontSize,
                                     font: font,
                                     color: PDFLib.rgb(0, 0, 0),
-                                    lineHeight: 17.6,
+                                    lineHeight: 18,
                                     });
         
             l_index = end_index;
@@ -177,12 +177,12 @@ async function createPdf() {
                 pages = pdfDoc.getPages()
             }
             pages[p_index].drawText(lines.slice(l_index, end_index).join("\n"),{
-                                    x: 30,
-                                    y: 705,
+                                    x: 100,
+                                    y: 686,
                                     size: fontSize,
                                     font: font,
                                     color: PDFLib.rgb(0, 0, 0),
-                                    lineHeight: 17.6,
+                                    lineHeight: 18,
                                     });
         
             l_index = end_index;
