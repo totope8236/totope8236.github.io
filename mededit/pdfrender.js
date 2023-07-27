@@ -48,6 +48,56 @@ const breakTextIntoLines = (text, size, font, maxWidth) => {
 };
 
 
+
+
+
+
+const betterBreakLines = (text, size, font, maxWidth) => {
+    const lines = [];
+    const pre_lines = text.split("\n");
+    
+    for (var i = 0; i<pre_lines.length; i++){
+        var pre_words = pre_lines[i].split(" ");
+        var line = "";
+        for (var j = 0; j<pre_words.length; j++){
+            const newLine = line + " " + pre_words[j];
+            if (font.widthOfTextAtSize(newLine, size) > maxWidth){
+                if (line == ""){
+                    // line was empty, one single big word, split it
+                    var k = 0;
+                    while (k < pre_words[j].length){
+                        console.log(k);
+                        if (font.widthOfTextAtSize(pre_words[j].slice(0,k), size) > maxWidth){
+                            //too big
+                            k -= 1;
+                            lines.push(pre_words[j].slice(0,k));
+                            pre_words[j] = pre_words[j].slice(k);
+                            line = "";
+                            j-=1;
+                            break;
+                        }else{
+                            k+=1;
+                        }
+                    }
+                }else{
+                    //big line, but has words in it. push line and continue
+                    lines.push(line);
+                    line = "";
+                    j -= 1;
+                }
+            }else{
+                // continue filling current line.
+                line = newLine;
+            }
+            
+        }
+        lines.push(line);
+    }
+    return lines;
+};
+
+
+
 async function createPdf() {
 // LOAD TEMPLATE
   const url = './pdfs/consultation.pdf';
@@ -68,12 +118,21 @@ async function createPdf() {
     const fontSize = 12;
     const maxWidth = 515;
     
+    /*
     const lines = breakTextIntoLines(
         document.getElementById("main_input").value,
         fontSize,
         font,
         maxWidth
-    )
+    )*/
+    
+    const lines = betterBreakLines(
+        document.getElementById("main_input").value,
+        fontSize,
+        font,
+        maxWidth
+    );
+    console.log(lines);
 
     var pages = pdfDoc.getPages();
     const firstPage = pages[0];
