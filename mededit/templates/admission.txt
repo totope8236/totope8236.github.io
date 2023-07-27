@@ -30,4 +30,5 @@ Impression et Plan:
 
 Dispo: ‡
 Anticoagulation: ‡
+Soluté: ‡
 PRN Rx: ‡

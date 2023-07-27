@@ -39,12 +39,17 @@
         "type": "selector",
         "title": "RDS",
         "content":{
-            "General":["Øfatigue","Øfièvre/frissons","Ø perte poids"],
-            "Cardio":["ØDRS", "Øpalpitations", "Øorthopnée", "ØDPN","Ølipothymie"],
-            "Resp":["Øtoux/expecto", "Ødyspnée", "Ødouleur pleurétique"],
-            "GI":["Ønausée/vomitissement", "Ødouleur abdo", "Øconstipation/diarrhée", "Øhématochézie/méléna"],
-            "GU":["Øhématurie", "Ødysurie", "Øpolyurie"],
-            "Neuro": ["Øcéphalée","Øperte conscience","Øconvulsions","Øamaurose fugace", "Øvertiges","Øparésie/paresthésie"]
+            "Général":["Øfatigue","Øfièvre/frissons","Ø perte poids"],
+            "Cardio":["ØDRS", "Øpalpitations", "Øorthopnée", "ØDPN","Ølipothymie", "syncope"],
+            "Pneumo":["Øtoux/expecto", "Øhémoptysie", "Ødyspnée", "Ødlr pleurétique", "Øwheezing"],
+            "Gastro":["Ønausée/vomitissement", "Ødouleur abdo", "Øconstipation/diarrhée", "Øhématochézie/méléna"],
+            "Uro":["Øhématurie", "Ødysurie", "Øpolyurie"],
+            "Neuro": ["Øcéphalée","Øperte conscience","Øconvulsions","Øamaurose fugace", "Øvertiges","Øparésie/paresthésie"],
+            "Géri":["Øperte d'autonomie aux AVQ/AVD","Øperte mémoire","Øconfusion","Øtrouble de la démarche","Øchute","Ømalutilisation des Rx"],
+            "Psy":["Ød'humeur dépressive","Øperte d'intérêts","Øanxiété","Øinsomnie","Øbaisse de concentration","Øidée suicidaire","Øidée hétéroagressive"],
+            "Derm":["Ørash","Øplaie","Ølésion préoccupante","Øprurit","Øecchymose"],
+            "MSK":["Ødouleur à un membre","Ødouleur articulaire","Øraideur articulaire","Øgonflement articulaire","Ømyalgie","Øtrauma"],
+            "ORL": ["Ørhinorrhée","Øcongestion nasale","Ømal de gorge","Øvoix rauque","Øotalgie","Øbaisse d'audition"]
         }
     },
     "O/E":{
@@ -52,10 +57,10 @@
         "title": "E/P",
         "content": {
             "Bon état général": [],
-            "Cardio": ["B1B2 N, ØOMI"],
-            "Poumons":["BEAB, clairs"],
-            "Abdo": ["Souple, Ødouleur, Ørebond"],
-            "Neuro": ["CNII-XII N, force MS & MI grossièrement N"]
+            "Cardio": ["RCR, B1B2 N, ØOMI"],
+            "Poumons":["BEA x2, clairs, Øtirage"],
+            "Abdo": ["Souple, Øsensibilité, Øressaut, Ødéfense, Ømasse"],
+            "Neuro": ["CNII-XII N, force MS & MI grossièrement N, sensibilité N, fonction cérébelleuse N, démarche stable"]
         }
     }
 }
