@@ -147,6 +147,64 @@ body#main{
 }
 
 
+/* SETTINGS *************/
+
+#settings-button{
+    position:fixed;
+    text-align: center;
+    bottom: 0%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+    z-index: 3000;
+
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    color: white;
+    background: #2c3e50;
+    font-size: 50px;
+    user-select: none;
+    
+    padding: 0;
+    margin: 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#settings-button:hover{
+    cursor: pointer;
+    background: #34495e;
+}
+
+
+
+#settings{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    
+    
+    padding: 20px 20px;
+    
+    z-index: 10000;
+    
+    width:80%;
+    height: 80%;
+    
+    border-radius: 10px;
+    
+    background: #1b1a1a;
+    color: white;
+    display: none;
+    
+}
+
+#settings.visible{
+    display: block;
+}
+
 
 /* PDF ************************/
 #pdf{

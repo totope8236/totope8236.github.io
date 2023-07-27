@@ -98,93 +98,113 @@ const betterBreakLines = (text, size, font, maxWidth) => {
 
 
 
+const forms_options = {
+  "progress": {
+    x: [118,100],
+    y: [458,686],
+    maxLines : [23, 36],
+    lineHeight: 18,
+    maxWidth: 460
+  },
+  "consultation":{
+    x: [53,30],
+    y: [382,705],
+    maxLines : [16, 38],
+    lineHeight: 17.6,
+    maxWidth: 510
+  }
+};
+
 async function createPdf() {
 // LOAD TEMPLATE
-  const url = './pdfs/progress.pdf';
+    var form_type = getCookie("form_type");
+    if (!form_type){
+        // default
+        form_type="progress"
+    }
+    
+// load template into memory
+  const url = './pdfs/'+form_type+'.pdf';
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
   const template = await PDFLib.PDFDocument.load(existingPdfBytes);
-  //const template_pages = template.getPages();
+  
     
-
+// create final doc and put initial pages.
     const pdfDoc = await PDFLib.PDFDocument.create();
-    
-    //pdfDoc.addPage();
-    
     await copy_document(template, pdfDoc);
-    //await copy_document(template, pdfDoc);
     
+// load options for rendering
+    const maxLines = forms_options[form_type].maxLines;
+    const l_height = forms_options[form_type].lineHeight;
+    const x = forms_options[form_type].x;
+    const y = forms_options[form_type].y;
     // FONT
     const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
     const fontSize = 11;
-    const maxWidth = 515;
+    const maxWidth = forms_options[form_type].maxWidth;
     
-    /*
-    const lines = breakTextIntoLines(
-        document.getElementById("main_input").value,
-        fontSize,
-        font,
-        maxWidth
-    )*/
-    
+
+    // DIVIDE text based on maxwidth
     const lines = betterBreakLines(
         document.getElementById("main_input").value,
         fontSize,
         font,
         maxWidth
     );
-    console.log(lines);
 
+    
+    // Start!
     var pages = pdfDoc.getPages();
-    const firstPage = pages[0];
-    
-    /*firstPage.drawText(lines.join("\n"), {
-    x: 53,
-    y: 381,
-    size: fontSize,
-    font: font,
-    color: PDFLib.rgb(0, 0, 0),
-    lineHeight: 17.6,
-  });*/
-    
     var l_index = 0;
     var p_index = 0;
     var end_index = 0;
-    var maxLines = [23, 36];
+    
     while (l_index < lines.length){
         if (p_index % 2 == 0){
+            // If on an even page
+            
+            // Check what is the maximum number of lines I can fit
             if (lines.length <= l_index+maxLines[0]){
+                
                 end_index = lines.length;
             }else{
                 end_index = l_index+maxLines[0]
             }
+            
+            //Add all the lines
             pages[p_index].drawText(lines.slice(l_index, end_index).join("\n"),{
-                x: 118,
-                                    y: 458,
+                x: x[0],
+                                    y: y[0],
                                     size: fontSize,
                                     font: font,
                                     color: PDFLib.rgb(0, 0, 0),
-                                    lineHeight: 18,
+                                    lineHeight: l_height,
                                     });
         
+            // Go to next page
             l_index = end_index;
             p_index += 1;
         }else{
+            // on an odd page
             if (lines.length <= l_index+maxLines[1]){
                 end_index = lines.length;
             }else{
+                // add extra pages if necessary
                 end_index = l_index+maxLines[1];
                 await copy_document(template, pdfDoc);
                 pages = pdfDoc.getPages()
             }
+            // draw text
             pages[p_index].drawText(lines.slice(l_index, end_index).join("\n"),{
-                                    x: 100,
-                                    y: 686,
+                                    x: x[1],
+                                    y: y[1],
                                     size: fontSize,
                                     font: font,
                                     color: PDFLib.rgb(0, 0, 0),
-                                    lineHeight: 18,
+                                    lineHeight: l_height,
                                     });
-        
+            
+            // next page
             l_index = end_index;
             p_index += 1;
         }

@@ -302,6 +302,36 @@ document.addEventListener("keydown", (e) =>{
 
 
 
+// *************************************
+// ****** SETTINGS *******
+// ***********************
+
+function showSettings(){
+    document.getElementById("settings").classList.add("visible");
+}
+
+
+function saveSettings(){
+    const type_select = document.getElementById("form_type");
+    setCookie("form_type",encodeURIComponent(type_select.options[type_select.selectedIndex].value));
+   
+    
+    setCookie("signature",encodeURIComponent(document.getElementById("signature").value));
+    document.getElementById("settings").classList.remove("visible");
+    createPdf();
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ****************************************************
 // ************    PDF
@@ -319,12 +349,15 @@ function toggleButton() {
         pdf_viewer.classList.remove("visible");
         main_input.classList.remove("half");
     }else{
+        //UPDATE PDF
+        createPdf();
+        
         // PDF was hiden, show it and update it!
         toggle_button.classList.remove("right");
         pdf_viewer.classList.add("visible");
         main_input.classList.add("half")
         
-        // TODO : UPDATE PDF
+        
     }
     
 }
