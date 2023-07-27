@@ -307,6 +307,12 @@ document.addEventListener("keydown", (e) =>{
 // ***********************
 
 function showSettings(){
+    const s = getCookie("signature");
+    if (!s){
+        s = "";
+    }
+    document.getElementById("signature").value = s;
+    
     document.getElementById("settings").classList.add("visible");
 }
 
@@ -316,21 +322,10 @@ function saveSettings(){
     setCookie("form_type",encodeURIComponent(type_select.options[type_select.selectedIndex].value));
    
     
-    setCookie("signature",encodeURIComponent(document.getElementById("signature").value));
+    setCookie("signature",document.getElementById("signature").value);
     document.getElementById("settings").classList.remove("visible");
     createPdf();
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ****************************************************

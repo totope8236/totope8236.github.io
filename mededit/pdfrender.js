@@ -104,14 +104,16 @@ const forms_options = {
     y: [458,686],
     maxLines : [23, 36],
     lineHeight: 18,
-    maxWidth: 460
+    maxWidth: 460,
+    signature: false
   },
   "consultation":{
     x: [53,30],
     y: [382,705],
     maxLines : [16, 38],
     lineHeight: 17.6,
-    maxWidth: 510
+    maxWidth: 510,
+      signature: true
   }
 };
 
@@ -151,7 +153,6 @@ async function createPdf() {
         font,
         maxWidth
     );
-
     
     // Start!
     var pages = pdfDoc.getPages();
@@ -215,25 +216,35 @@ async function createPdf() {
     
     
     
-    /*
-    // ADD DATE TO BOTTOM OF PAGE
-    firstPage.drawText(moment().format("YYYY     MM        DD      HH  mm"), {
-        x: 86,
-        y: 72,
-        size: 12,
-        font: timesRomanFont,
-        color: PDFLib.rgb(0, 0, 0),
-    });
+    if (forms_options[form_type].signature){
+        console.log("here");
+        // ADD DATE TO BOTTOM OF PAGE
+        for (i = 0; i< pages.length; i+=2){
+            pages[i].drawText(moment().format("YYYY    MM       DD    HH  mm"), {
+                x: 86,
+                y: 72,
+                size: 12,
+                font: font,
+                color: PDFLib.rgb(0, 0, 0),
+            });
 
-    firstPage.drawText("Dre Bastien | Christophe Caron R31719", {
-        x: 260,
-        y: 75,
-        size: 12,
-        font: timesRomanFont,
-        color: PDFLib.rgb(0, 0, 0),
-    });
+                var sig = getCookie("signature");
+                if (!sig){
+                    sig = "";
+                }
+
+            pages[i].drawText(sig, {
+                x: 260,
+                y: 75,
+                size: 12,
+                font: font,
+                color: PDFLib.rgb(0, 0, 0),
+            });
+        }
     
-    */
+    }
+    
+    
 
 			// Trigger the browser to download the PDF document
       
