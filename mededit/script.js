@@ -307,7 +307,7 @@ document.addEventListener("keydown", (e) =>{
 // ***********************
 
 function showSettings(){
-    const s = getCookie("signature");
+    var s = getCookie("signature");
     if (!s){
         s = "";
     }
