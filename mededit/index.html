@@ -3,6 +3,11 @@
 <link rel="stylesheet" href="styles.css">    
 </header>
     
+    <head>
+        <!--<script type="text/javascript" src="js/jspdf.js"></script>-->
+        <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+    </head>
+    
 <body id="main">   
     <div id="context-menu">
         <div class="item">Option 1</div>
@@ -25,7 +30,7 @@
     </div>
     
     
-<iframe id="pdf" class=""></iframe>
+<iframe loading="auto" id="pdf" class=""></iframe>
     
 
     
@@ -40,19 +45,18 @@
     </div>
 
     
+   
+    
 </body>
+    
+    
+    
     <script src="js/pdf-lib.js"></script>
     <script src="js/moment.js"></script>
     <script src="script.js"></script>
     
     
-    <script>
-        //const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
-        //const {writeFileSync, readFileSync } = require("fs")
-   
-  </script>
-    
-    <script>
+       <script>
     //On load, read cookie and set main input.
 const text_content = getCookie("text_field");
         // decode URI used to put back the \n which caused interference.
@@ -63,4 +67,9 @@ if (text_content){
     document.getElementById("main_input").value = "";
 }
     </script>
+    
+    <script src="pdfrender.js"></script>
+     <!--<script src="pdfreader2.js"></script>-->
+    
+ 
 </html>
