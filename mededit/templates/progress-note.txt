@@ -1,10 +1,10 @@
 MEDECINE INTERNE - NOTE EVOLUTION
 ID: 
 
-SUBJECTIVE
+S:
 
 
-OBJECTIVE
+O:
 TA ‡ ; FC ‡ ; FR ‡ ; Sat ‡% AA; T‡C;
 Alerte. Pas de détresse.
 
