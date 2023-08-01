@@ -114,7 +114,15 @@ const forms_options = {
     lineHeight: 17.6,
     maxWidth: 510,
       signature: true
-  }
+  },
+    "sommaire":{
+        x:[0,30],
+        y:[0,514],
+        maxLines : [0,16],
+        lineHeight: 18.7,
+        maxWidth:530,
+        signature:false
+    }
 };
 
 async function createPdf() {
