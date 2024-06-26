@@ -53,15 +53,22 @@
         }
     },
     "O/E":{
-        "type": "selector",
-        "title": "E/P",
-        "content": {
-            "Bon état général": [],
-            "Cardio": ["RCR","B1B2 N","ØOMI"],
-            "Poumons":["BEA x2","clairs","Øtirage"],
-            "Abdo": ["Souple","Øsensibilité","Øressaut","Ødéfense","Ømasse"],
-            "Neuro": ["CNII-XII N","force MS & MI grossièrement N","sensibilité N","fonction cérébelleuse N","démarche stable"]
+        "E/P":{
+            "type": "selector",
+            "title": "E/P",
+            "content": {
+                "Bon état général": [],
+                "Cardio": ["RCR","B1B2 N","ØOMI"],
+                "Poumons":["BEA x2","clairs","Øtirage"],
+                "Abdo": ["Souple","Øsensibilité","Øressaut","Ødéfense","Ømasse"],
+                "Neuro": ["CNII-XII N","force MS & MI grossièrement N","sensibilité N","fonction cérébelleuse N","démarche stable"]
+            }
+        },
+        "RESUS-POCUS":{
+            "type":"short-text",
+            "value":"POCUS\nVCI: ‡\nCoeur: Pas d'épanchement péricardique, FEVG grossièrement N, pas de dilatation RV, pas de D-sign\nPoumon: ØPTX, Øépanchements"
         }
+        
     },
     "metadata":{
         "container-meta":{
