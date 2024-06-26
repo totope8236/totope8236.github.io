@@ -1,28 +1,35 @@
-ADMISSION - MED INTERNE
-ID: ‡
-NS: ‡
+ADMISSION
+<l>ID:
 
-ATCD:
+ATCD
+</l>
+<r>NS:
+All:
+HdV: Ø x3 |T: x ‡|EtOH: ‡|D: ‡;
+
+RX DOMICILE:
 ‡
 
-Rx:
+RX HOSPIT:
 ‡
+</r>
 
-All: ‡
-HdV: Ø x3; cig x ‡; EtOH ‡; d ‡;
+<l>HMA:
 
-HMA:
-‡
-
-RDS:
-‡
 
 E/P:
 TA ‡ ; FC ‡ ; FR ‡ ; Sat ‡% AA; T‡C;
 Alerte. Pas de détresse.
+</l>
+<r>
+INVESTIGATIONS:
+LABORATOIRES:
 
-Investigations:
-‡
+
+IMAGERIES:
+
+
+</r>
 
 Impression et Plan:
 ‡

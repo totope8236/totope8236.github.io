@@ -23,12 +23,41 @@ function getCookie(name) {
 }
 
 function save_text_to_cookie() {
+    
+    // SAVE TEXT TO COOKIE
     // must encode the field cookie to ensure \n gets saved
     setCookie("text_field", encodeURIComponent(document.getElementById("main_input").value));
 }
 
 
-
+function handle_tags() {
+    // if last entered characher is >, perform special action!
+    if (event.key==">"){
+        var myField = document.getElementById("main_input");
+        const backup = myField.selectionStart;
+        var p = myField.selectionStart-1;
+        //console.log("running >");
+    
+        while (true){
+            if (p < 0){
+                break;
+            }
+            var ch = myField.value.charAt(p)
+            if ((ch == ' ') || (ch == '\t') || (ch == '\n')){
+                break;
+            }
+            if (ch == '<'){
+                insertTextAtPosition("</"+myField.value.substring(p+1,myField.selectionStart) + ">");
+                myField.selectionStart = backup;
+                myField.selectionEnd = backup;
+                break;
+            }
+            p -= 1;
+        }
+    }
+    
+    return null;
+}
 
 
 
@@ -320,7 +349,9 @@ function showSettings(){
 function saveSettings(){
     const type_select = document.getElementById("form_type");
     setCookie("form_type",encodeURIComponent(type_select.options[type_select.selectedIndex].value));
-   
+    
+    const hosp_select = document.getElementById("hospital");
+   setCookie("hospital",encodeURIComponent(hosp_select.options[hosp_select.selectedIndex].value));
     
     setCookie("signature",document.getElementById("signature").value);
     document.getElementById("settings").classList.remove("visible");

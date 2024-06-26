@@ -62,5 +62,15 @@
             "Abdo": ["Souple","Øsensibilité","Øressaut","Ødéfense","Ømasse"],
             "Neuro": ["CNII-XII N","force MS & MI grossièrement N","sensibilité N","fonction cérébelleuse N","démarche stable"]
         }
+    },
+    "metadata":{
+        "container-meta":{
+            "type":"short-text",
+            "value":"<meta></meta>"
+        },
+        "fill patient id":{
+            "type":"long-text",
+            "src":"basic-id.txt"
+        }
     }
 }

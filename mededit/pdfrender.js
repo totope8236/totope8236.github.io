@@ -66,7 +66,6 @@ const betterBreakLines = (text, size, font, maxWidth) => {
                     // line was empty, one single big word, split it
                     var k = 0;
                     while (k < pre_words[j].length){
-                        console.log(k);
                         if (font.widthOfTextAtSize(pre_words[j].slice(0,k), size) > maxWidth){
                             //too big
                             k -= 1;
@@ -100,26 +99,26 @@ const betterBreakLines = (text, size, font, maxWidth) => {
 
 const forms_options = {
   "progress": {
-    x: [118,100],
-    y: [458,686],
-    maxLines : [23, 36],
-    lineHeight: 18,
-    maxWidth: 460,
+    x: [48,28],
+    y: [456,684],
+    maxLines : [31, 49],
+    lineHeight: 13,
+    maxWidth: 540,
     signature: false
   },
   "consultation":{
     x: [53,30],
     y: [382,705],
-    maxLines : [16, 38],
-    lineHeight: 17.6,
+    maxLines : [22, 51],
+    lineHeight: 13,
     maxWidth: 510,
       signature: true
   },
     "sommaire":{
-        x:[0,30],
-        y:[0,514],
-        maxLines : [0,16],
-        lineHeight: 18.7,
+        x:[48,30],
+        y:[450,514],
+        maxLines : [9,23],
+        lineHeight: 13,
         maxWidth:530,
         signature:false
     }
@@ -132,9 +131,186 @@ async function createPdf() {
         // default
         form_type="progress"
     }
-    
+    var hospital = getCookie("hospital");
+    if (!hospital){
+        // default
+        hospital = "hdq"
+    }
 // load template into memory
-  const url = './pdfs/'+form_type+'.pdf';
+  const url = './pdfs/'+hospital + "/" + form_type+'.pdf';
+  const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
+  const template = await PDFLib.PDFDocument.load(existingPdfBytes);
+  
+    
+// create final doc and put initial pages.
+    const pdfDoc = await PDFLib.PDFDocument.create();
+    await copy_document(template, pdfDoc);
+    
+    
+// load options for rendering
+    const maxLines = forms_options[form_type].maxLines;
+    const l_height = forms_options[form_type].lineHeight;
+    const x = forms_options[form_type].x;
+    const y = forms_options[form_type].y;
+    // FONT
+    const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const fontSize = 10;
+    const formMaxWidth = forms_options[form_type].maxWidth;
+    
+
+    
+    // Take text and remove the metadata
+    var t = document.getElementById("main_input").value;
+    var regex = /<meta\b[^>]*>([\n\r\s\S]*)<\/meta>/g;
+    const meta_out = t.split(regex);
+    if (meta_out.length == 3){
+        const meta_text = meta_out[1];
+        t = meta_out[0] + meta_out[2];
+    }
+    
+    
+    // TODO PROCESS META DATA
+    
+    
+    // divide text into left and right
+    var regex = /<([^\/]*)>([\n\r\s\S]*?)<\/\1>/g;
+    
+    // number of clusters will always be 1+3*n
+    var clusters = t.split(regex);
+    const n_of_matches = (clusters.length-1)/3 //number of matches
+    
+    var boundary = [0,0]; // stores [page, line]
+    // Start!
+    var pages = pdfDoc.getPages();
+    var l_index = 0;
+    var p_index = 0;
+    var end_index = 0;
+    
+    // 'real" part
+    boundary = [0,0];
+    var position = [0,0]; // page, line
+    var beginning_of_previous = [0,0];
+    var previous_type_of_text_block = "f"; //l, r ou f
+    
+    async function write_text(t, xIndexes, maxWidth){
+        // dynamically updates the boundary
+        const lines = betterBreakLines(
+            t,
+            fontSize,
+            font,
+            maxWidth
+        )
+        l_index = 0;
+        var pages = pdfDoc.getPages();
+        while (l_index < lines.length){
+            //while I still have lines to paste!
+            // get how many lines I will have to write on this page
+            var p_index = position[0]
+            const possible_l = maxLines[p_index%2]-position[1];
+            
+            var lines_to_write = 0;
+            if (( lines.length-l_index) > possible_l){
+                lines_to_write = possible_l;
+            }else{
+                lines_to_write = (lines.length-l_index);
+            }
+            
+            // add the lines
+            pages[p_index].drawText(lines.slice(l_index, l_index+lines_to_write).join("\n"),{
+                    x: xIndexes[p_index%2],y: position[1]*-l_height+y[p_index%2],size: fontSize,
+                                        font: font,
+                                        color: PDFLib.rgb(0, 0, 0),
+                                        lineHeight: l_height,
+                                        });
+            
+            // update position
+            if (lines_to_write == possible_l){
+                // go to next page
+                if (p_index%2==1){
+                    //if odd, add page
+                    await copy_document(template, pdfDoc);
+                    pages = pdfDoc.getPages()
+                    pages = pdfDoc.getPages();
+                }
+                position[0] += 1;
+                position[1] = 0;
+            }else{
+                position[1] = position[1] + lines_to_write;
+            }
+            l_index += lines_to_write;
+        }
+        //END OF DRAW TEXT FUNCTION
+    }
+    
+    
+    write_text(clusters[0],x,formMaxWidth);
+    boundary = position;
+    
+    
+    for (let i=0; i<n_of_matches;i++){
+        if (clusters[i*3+1] == "l"){
+            if (previous_type_of_text_block == "r"){
+                position = beginning_of_previous;
+            }
+            previous_type_of_text_block = "l"
+            beginning_of_previous = [position[0],position[1]];
+            write_text(clusters[i*3+2],x,formMaxWidth/2);
+            
+            if (position[0]>boundary[0] || position[1]>boundary[1]){
+                boundary = position;
+            }
+            position = boundary;
+            
+            // write extra text IFF its not empty!
+            if (clusters[i*3+3].trim().length!=0){
+                write_text(clusters[i*3+3],x, formMaxWidth);
+                previous_type_of_text_block = "f"
+            }
+            
+        }else{
+            // then it's a right cluster
+            if (previous_type_of_text_block == "l"){
+                position = beginning_of_previous;
+            }
+            previous_type_of_text_block = "r"
+            beginning_of_previous = position;
+            
+            write_text(clusters[i*3+2],[x[0]+formMaxWidth/2,x[1]+formMaxWidth/2],formMaxWidth/2);
+            
+            if (position[0]>boundary[0] || position[1]>boundary[1]){
+                boundary = position;
+            }
+            position = boundary;
+            
+            // write extra text IFF its not empty!
+            if (clusters[i*3+3].trim().length!=0){
+                write_text(clusters[i*3+3],x, formMaxWidth);
+                previous_type_of_text_block = "f"
+            }
+        }
+    }
+    
+    //SAVE AND RENDER PDF
+    const pdfBytes = await pdfDoc.save();
+    renderInIframe(pdfBytes);
+}
+
+
+// BACKUP FOR CREATE PDF THAT WORKED
+async function oldCreatePdf() {
+// LOAD TEMPLATE
+    var form_type = getCookie("form_type");
+    if (!form_type){
+        // default
+        form_type="progress"
+    }
+    var hospital = getCookie("hospital");
+    if (!hospital){
+        // default
+        hospital = "hdq"
+    }
+// load template into memory
+  const url = './pdfs/'+hospital + "/" + form_type+'.pdf';
   const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
   const template = await PDFLib.PDFDocument.load(existingPdfBytes);
   
@@ -150,7 +326,7 @@ async function createPdf() {
     const y = forms_options[form_type].y;
     // FONT
     const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
-    const fontSize = 11;
+    const fontSize = 10;
     const maxWidth = forms_options[form_type].maxWidth;
     
 
@@ -168,9 +344,18 @@ async function createPdf() {
     var p_index = 0;
     var end_index = 0;
     
+    // Extract and remove metadata
+    
+    
+    
     while (l_index < lines.length){
         if (p_index % 2 == 0){
             // If on an even page
+            
+            // ADD patient METADATA, if available
+            
+            
+            
             
             // Check what is the maximum number of lines I can fit
             if (lines.length <= l_index+maxLines[0]){
@@ -225,7 +410,6 @@ async function createPdf() {
     
     
     if (forms_options[form_type].signature){
-        console.log("here");
         // ADD DATE TO BOTTOM OF PAGE
         for (i = 0; i< pages.length; i+=2){
             pages[i].drawText(moment().format("YYYY    MM       DD    HH  mm"), {
@@ -265,4 +449,3 @@ async function createPdf() {
     //download(pdfBytes, "pdf-lib_page_copying_example.pdf", "application/pdf");
     
 }
-

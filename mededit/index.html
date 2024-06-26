@@ -32,6 +32,15 @@
     
     <div id="settings">
         <h1>Settings</h1>
+        <p>Hospital</p><select for="hospital" id="hospital">
+        <option value="hdq">HDQ</option>
+        <option value="chul">CHUL</option>
+        <!--TODO-->
+        <!--
+        <option value="hej">HEJ</option>
+        <option value="sfa">SFA</option>
+        <option value="iucpq">iucpq</option>-->
+        </select>
             <p>Form type</p><select for="form_type" id="form_type">
         <option value="progress">Progress</option>
         <option value="consultation">Consultation</option>
@@ -54,7 +63,7 @@
 
     
 <form>
-    <textarea id="main_input" class="" onchange onkeyuponpaste oninput="save_text_to_cookie()"></textarea>
+    <textarea id="main_input" class="" onchange onkeyuponpaste oninput="save_text_to_cookie()" onkeydown="handle_tags()"></textarea>
 </form>
 
     <div id="toggle-button" class="right" onclick="toggleButton()">

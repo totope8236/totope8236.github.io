@@ -1,11 +1,18 @@
-MEDECINE INTERNE - NOTE EVOLUTION
-ID: 
+‡ - NOTE EVOLUTION
+<l>ID: ‡</l>
+<r># ‡</r>
 
-S:
-
+<l>S:
+‡
 
 O:
 TA ‡ ; FC ‡ ; FR ‡ ; Sat ‡% AA; T‡C;
 Alerte. Pas de détresse.
-
-IMPRESSION/PLAN
+</l>
+<r>RX:
+‡
+Inv:
+‡
+</r>
+IMPRESSION/PLAN:
+‡
