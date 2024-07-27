@@ -256,7 +256,8 @@ async function createPdf() {
             beginning_of_previous = [position[0],position[1]];
             write_text(clusters[i*3+2],x,formMaxWidth/2);
             
-            if (position[0]>boundary[0] || position[1]>boundary[1]){
+            if ((position[0]*500+position[1])>(boundary[0]*500+boundary[1])){
+                console.log("here");
                 boundary = position;
             }
             position = boundary;
@@ -277,7 +278,8 @@ async function createPdf() {
             
             write_text(clusters[i*3+2],[x[0]+formMaxWidth/2,x[1]+formMaxWidth/2],formMaxWidth/2);
             
-            if (position[0]>boundary[0] || position[1]>boundary[1]){
+            if ((position[0]*500+position[1])>(boundary[0]*500+boundary[1])){
+                console.log("here");
                 boundary = position;
             }
             position = boundary;

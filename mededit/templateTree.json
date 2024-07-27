@@ -28,7 +28,7 @@
         },
         "LFTs":{
             "type": "short-text",
-            "value":"LFTs: Aφ ‡; ALT ; AST ‡; GGT ‡;\n    T-bili ‡ (conj ‡); INR ‡; Alb ‡; \n"
+            "value":"LFTs: AlkP ‡; ALT ; AST ‡; GGT ‡;\n    T-bili ‡ (conj ‡); INR ‡; Alb ‡; \n"
         },
         "Gaz":{
             "type": "short-text",
