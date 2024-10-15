@@ -198,33 +198,33 @@ async function createPdf() {
     
     
     async function write_metadata(p){
-        
-        try{
+        var pages = pdfDoc.getPages();
+        if ("MRN" in meta_processed){
             pages[p].drawText(meta_processed["MRN"].toUpperCase(),{
                     x: 350,y: 750,size: 20,
                                         font: font,
                                         color: PDFLib.rgb(0, 0, 0),
                                         lineHeight: 30,
                                         });
-        }catch(e){}
+        }
         
-        try{
+        if ("name" in meta_processed){
             pages[p].drawText(meta_processed["name"],{
                     x: 350,y: 700,size: 20,
                                         font: font,
                                         color: PDFLib.rgb(0, 0, 0),
                                         lineHeight: 30,
                                         });
-        }catch(e){}
+        }
         
-        try{
+        if ("NAM" in meta_processed){
             pages[p].drawText(meta_processed["NAM"],{
                     x: 350,y: 680,size: 16,
                                         font: font,
                                         color: PDFLib.rgb(0, 0, 0),
                                         lineHeight: 30,
                                         });
-        }catch(e){}
+        }
         
     }
     
