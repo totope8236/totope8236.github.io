@@ -11,6 +11,10 @@
     "USI":{
         "type": "long-text",
         "src": "usi.txt"
+    },
+    "consult ped": {
+      "type": "long-text",
+      "src": "cons-ped.txt"
     }
   },
     "labs": {

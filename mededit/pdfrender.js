@@ -24,7 +24,6 @@ async function copy_document(src, destination){
 
 
 
-
 const breakTextIntoLines = (text, size, font, maxWidth) => {
   const lines = [];
   let textIdx = 0;
@@ -172,8 +171,10 @@ async function createPdf() {
     // TODO PROCESS META DATA
     
     
+    
     // divide text into left and right
     var regex = /<([^\/]*)>([\n\r\s\S]*?)<\/\1>/g;
+    
     
     // number of clusters will always be 1+3*n
     var clusters = t.split(regex);
@@ -242,53 +243,56 @@ async function createPdf() {
         //END OF DRAW TEXT FUNCTION
     }
     
-    
     write_text(clusters[0],x,formMaxWidth);
     boundary = position;
-    
-    
+    //console.log(clusters);
     for (let i=0; i<n_of_matches;i++){
+        var flag = false;
+        //console.log(position);
+        //console.log(beginning_of_previous);
+        
+        if ((clusters[i*3+1] == "l" && previous_type_of_text_block == "r") ||
+           (clusters[i*3+1] == "r" && previous_type_of_text_block == "l")){
+            position = [...beginning_of_previous];
+            flag=true;
+        }
+        previous_type_of_text_block = clusters[i*3+1]; // for the future
+        beginning_of_previous = [position[0],position[1]]; // for the future
+        
+        // DO THE WRITING!
         if (clusters[i*3+1] == "l"){
-            if (previous_type_of_text_block == "r"){
-                position = beginning_of_previous;
-            }
-            previous_type_of_text_block = "l"
-            beginning_of_previous = [position[0],position[1]];
             write_text(clusters[i*3+2],x,formMaxWidth/2);
-            
-            if ((position[0]*500+position[1])>(boundary[0]*500+boundary[1])){
-                console.log("here");
-                boundary = position;
-            }
-            position = boundary;
-            
-            // write extra text IFF its not empty!
-            if (clusters[i*3+3].trim().length!=0){
-                write_text(clusters[i*3+3],x, formMaxWidth);
-                previous_type_of_text_block = "f"
-            }
-            
         }else{
-            // then it's a right cluster
-            if (previous_type_of_text_block == "l"){
-                position = beginning_of_previous;
-            }
-            previous_type_of_text_block = "r"
-            beginning_of_previous = position;
-            
             write_text(clusters[i*3+2],[x[0]+formMaxWidth/2,x[1]+formMaxWidth/2],formMaxWidth/2);
+        }
+        
+
+        if ((position[0]*500+position[1])>(boundary[0]*500+boundary[1])){
+            boundary = [...position]; // update boundary
+        }
+        
+        position = [...boundary];
+
+        // write extra text IFF its not empty OR second part of dual!
+        console.log([clusters[i*3+3]]);
+        if (clusters[i*3+3].trim().length!=0 || flag){
+            var content = clusters[i*3+3];
             
-            if ((position[0]*500+position[1])>(boundary[0]*500+boundary[1])){
-                console.log("here");
-                boundary = position;
+            if (content != "\n"){
+                if (content.trim.length == 0){
+                    write_text(content.substring(1),x, formMaxWidth); // just skip the first char
+                }else{
+                    if (content[0] == "\n"){
+                        content = content.substr(1);
+                    }
+                    if (content[content.length-1] == "\n"){
+                        content = content.substr(0,content.length-1);
+                    }
+                    write_text(content,x,formMaxWidth);
+                }
             }
-            position = boundary;
             
-            // write extra text IFF its not empty!
-            if (clusters[i*3+3].trim().length!=0){
-                write_text(clusters[i*3+3],x, formMaxWidth);
-                previous_type_of_text_block = "f"
-            }
+            previous_type_of_text_block = "f"
         }
     }
     

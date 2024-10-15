@@ -1,0 +1,54 @@
+<l>ID: ‡
+RC: ‡
+
+ATCD PÉRINAT:
+Grossesse:
+Accouchement:
+
+ATCD PERSO:
+
+ATCD FAM :
+
+
+</l>
+<r>Vaccins:
+All:
+
+
+RX DOMICILE:
+‡
+
+RX HOSPIT:
+‡
+
+DÉVELOPPEMENT:
+
+PSYCHOSOCIAL:
+
+</r>
+
+HMA:
+
+HEADS
+HdV: Ø x3 |T: x ‡|EtOH: ‡|D: ‡;
+
+
+E/P: Poids: ‡ Taille: ‡  PC : ‡ 
+TA ‡ ; FC ‡ ; FR ‡ ; Sat ‡% AA; T‡C;
+
+
+
+
+INVESTIGATIONS:
+LABORATOIRES:
+
+
+IMAGERIES:
+
+
+
+IMPRESSION
+‡
+
+PLAN:
+‡
