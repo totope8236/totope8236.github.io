@@ -24,15 +24,15 @@
       },
         "Heme":{
             "type": "short-text",
-            "value":"Heme: Hgb ‡; GB ‡ (neutro ‡); Plt ‡;\n"
+            "value":"FSC: Hgb ‡; GB ‡ (neutro ‡); Plt ‡;\n"
         },
         "Lytes":{
             "type": "short-text",
-            "value":"Lytes: Na ‡; Cl ‡; K ‡; Cr ‡ (DFG ‡); U ‡;\n"
+            "value":"E+: Na ‡; Cl ‡; K ‡; Cr ‡ (DFG ‡); U ‡;\n    Ca ‡; Phos ‡; Mg ‡;"
         },
         "LFTs":{
             "type": "short-text",
-            "value":"LFTs: AlkP ‡; ALT ; AST ‡; GGT ‡;\n    T-bili ‡ (conj ‡); INR ‡; Alb ‡; \n"
+            "value":"Hep: AlkP ‡; ALT ; AST ‡; GGT ‡;\n    T-bili ‡ (conj ‡); INR ‡; Alb ‡; \n"
         },
         "Gaz":{
             "type": "short-text",
