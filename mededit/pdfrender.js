@@ -159,17 +159,20 @@ async function createPdf() {
 
     
     // Take text and remove the metadata
+    var meta_processed = null;
     var t = document.getElementById("main_input").value;
     var regex = /<meta\b[^>]*>([\n\r\s\S]*)<\/meta>/g;
     const meta_out = t.split(regex);
     if (meta_out.length == 3){
         const meta_text = meta_out[1];
         t = meta_out[0] + meta_out[2];
+        
+        try {
+            meta_processed = JSON.parse(meta_text);
+        } catch (e) {
+            alert("metadata is not valid");
+        }
     }
-    
-    
-    // TODO PROCESS META DATA
-    
     
     
     // divide text into left and right
@@ -192,6 +195,38 @@ async function createPdf() {
     var position = [0,0]; // page, line
     var beginning_of_previous = [0,0];
     var previous_type_of_text_block = "f"; //l, r ou f
+    
+    
+    async function write_metadata(p){
+        
+        try{
+            pages[p].drawText(meta_processed["MRN"].toUpperCase(),{
+                    x: 350,y: 750,size: 20,
+                                        font: font,
+                                        color: PDFLib.rgb(0, 0, 0),
+                                        lineHeight: 30,
+                                        });
+        }catch(e){}
+        
+        try{
+            pages[p].drawText(meta_processed["name"],{
+                    x: 350,y: 700,size: 20,
+                                        font: font,
+                                        color: PDFLib.rgb(0, 0, 0),
+                                        lineHeight: 30,
+                                        });
+        }catch(e){}
+        
+        try{
+            pages[p].drawText(meta_processed["NAM"],{
+                    x: 350,y: 680,size: 16,
+                                        font: font,
+                                        color: PDFLib.rgb(0, 0, 0),
+                                        lineHeight: 30,
+                                        });
+        }catch(e){}
+        
+    }
     
     async function write_text(t, xIndexes, maxWidth){
         // dynamically updates the boundary
@@ -232,6 +267,8 @@ async function createPdf() {
                     await copy_document(template, pdfDoc);
                     pages = pdfDoc.getPages()
                     pages = pdfDoc.getPages();
+                    
+                    write_metadata(position[0]+1); // adds the name and MRN
                 }
                 position[0] += 1;
                 position[1] = 0;
@@ -243,13 +280,14 @@ async function createPdf() {
         //END OF DRAW TEXT FUNCTION
     }
     
+    
+    
+    write_metadata(0); // adds name to first page
     write_text(clusters[0],x,formMaxWidth);
     boundary = position;
-    //console.log(clusters);
+    
     for (let i=0; i<n_of_matches;i++){
         var flag = false;
-        //console.log(position);
-        //console.log(beginning_of_previous);
         
         if ((clusters[i*3+1] == "l" && previous_type_of_text_block == "r") ||
            (clusters[i*3+1] == "r" && previous_type_of_text_block == "l")){
