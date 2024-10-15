@@ -1,7 +1,8 @@
-ADMISSION
+ADMISSION (‡)
 <l>ID:
 
-ATCD
+ATCD:
+‡
 </l>
 <r>NS:
 All:
@@ -39,3 +40,8 @@ Dispo: ‡
 Anticoagulation: ‡
 Soluté: ‡
 PRN Rx: ‡
+<meta>{
+"name":"‡",
+"MRN":"‡",
+"NAM":"‡"
+}</meta>
