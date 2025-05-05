@@ -120,6 +120,14 @@ const forms_options = {
         lineHeight: 13,
         maxWidth:530,
         signature:false
+    },
+    "externeped":{
+        x: [48,28],
+        y: [565,684],
+        maxLines : [31, 47],
+        lineHeight: 13,
+        maxWidth: 540,
+        signature: false
     }
 };
 
