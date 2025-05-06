@@ -1,0 +1,50 @@
+4N
+ID: ‡
+
+
+Neuro:
+Rx: ‡
+‡
+
+
+Cardio:
+Rx: ‡
+TA‡; FC ‡;
+Bilan hémodynamique: IC ‡; RVS ‡; RVP ‡; TVC ‡; PAP ‡/‡ (‡);
+
+TVC
+
+ECG
+Lactate ‡: ‡
+
+
+Pulmonaire:
+Sat ‡% sous ‡;
+Gaz: pH ‡ / pCO2 ‡ / HCO3 ‡
+
+
+Néphro-métabolique:
+Rx: ‡
+Poids: ‡
+Urine: ‡ (‡cc/hr);  NET ‡;
+
+Lytes: Na ‡; Cl ‡; K ‡; Cr ‡ (DFG ‡); U ‡;
+Ca ‡; Phos ‡; Mg ‡;
+
+
+Gastro-intestinal:
+Rx: ‡
+glycémie: ‡
+selles: ‡
+
+
+Hémato-infectieux:
+Rx: ‡
+T‡C;
+
+Hgb ‡; GB ‡ (neutro ‡); Plt ‡; CRP ‡;
+INR ‡; PTT ‡;
+
+
+Impression/Plan: 
+‡

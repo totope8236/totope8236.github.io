@@ -12,6 +12,10 @@
         "type": "long-text",
         "src": "usi.txt"
     },
+    "USI 4N":{
+        "type": "long-text",
+        "src": "usi4n.txt"
+    },
     "consult ped": {
       "type": "long-text",
       "src": "cons-ped.txt"
