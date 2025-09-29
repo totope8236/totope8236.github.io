@@ -128,6 +128,14 @@ const forms_options = {
         lineHeight: 13,
         maxWidth: 540,
         signature: false
+    },
+    "progress-hdl":{
+        x: [48,48],
+        y: [552,684],
+        maxLines : [40, 49],
+        lineHeight: 13,
+        maxWidth: 540,
+        signature: false
     }
 };
 
@@ -141,7 +149,7 @@ async function createPdf() {
     var hospital = getCookie("hospital");
     if (!hospital){
         // default
-        hospital = "hdq"
+        hospital = "chul"
     }
 // load template into memory
   const url = './pdfs/'+hospital + "/" + form_type+'.pdf';
@@ -359,7 +367,7 @@ async function oldCreatePdf() {
     var hospital = getCookie("hospital");
     if (!hospital){
         // default
-        hospital = "hdq"
+        hospital = "chul"
     }
 // load template into memory
   const url = './pdfs/'+hospital + "/" + form_type+'.pdf';
