@@ -23,7 +23,6 @@ function getCookie(name) {
 }
 
 function save_text_to_cookie() {
-    
     // SAVE TEXT TO COOKIE
     // must encode the field cookie to ensure \n gets saved
     setCookie("text_field", encodeURIComponent(document.getElementById("main_input").value));
@@ -343,8 +342,45 @@ function showSettings(){
     document.getElementById("signature").value = s;
     
     document.getElementById("settings").classList.add("visible");
+    
+    
+
+    // Put list of patients within the list
+    
+   var saved_patients = getSavedPatientsFromCookies();
+    
+   var ids = Object.keys(saved_patients);
+    
+    const listBody = document.getElementById("save-list");
+    listBody.innerHTML = "";
+    
+    for (let i = 0; i< ids.length; i++){
+        var p = saved_patients[ids[i]];
+        listBody.innerHTML += `<li><button onclick="loadPatient('${p["mrn"]}')">Load &#128194;</button> ${p["name"]} | ${p["mrn"]} | ${p["time"]} - <button onclick="deletePatient('${p["mrn"]}')" style='background-color:red'>DELETE &#128465;</button></li>`
+    }
+    
 }
 
+function loadPatient(mrn){
+    if (confirm("Loading will delete current text, proceed?")){
+        var saved_patients = getSavedPatientsFromCookies();
+
+        document.getElementById("main_input").value = decodeURIComponent(saved_patients[mrn]["text"]);
+    }
+    document.getElementById("settings").classList.remove("visible");
+}
+function deletePatient(mrn){
+    if (confirm(`Do you really want to delete ${mrn}?`)){
+        var saved_patients = getSavedPatientsFromCookies();
+        
+        delete saved_patients[mrn];
+        
+        setCookie("saved_patients",JSON.stringify(saved_patients));
+        
+        alert("Deleted!");
+    }
+    document.getElementById("settings").classList.remove("visible");
+}
 
 function saveSettings(){
     const type_select = document.getElementById("form_type");
@@ -356,6 +392,73 @@ function saveSettings(){
     setCookie("signature",document.getElementById("signature").value);
     document.getElementById("settings").classList.remove("visible");
     createPdf();
+}
+
+
+function getSavedPatientsFromCookies(){
+    var s = getCookie("saved_patients");
+    if (!s){
+        s = "{}";
+    }
+    var saved_patients = null;
+    try{
+        saved_patients = JSON.parse(s);
+    }catch (e){
+        alert("failure of saves, wiping cookies");
+        console.log(s);
+        setCookie("saved_patients","");
+        saved_patients = {};
+    }
+    return saved_patients;
+}
+
+function saveCurrentPatient(){
+
+    var saved_patients = getSavedPatientsFromCookies();
+        
+    console.log(saved_patients);
+    
+    // Take text and remove the metadata
+    var meta_processed = null;
+    var t = document.getElementById("main_input").value;
+    var regex = /<meta\b[^>]*>([\n\r\s\S]*)<\/meta>/g;
+    const meta_out = t.split(regex);
+    if (meta_out.length == 3){
+        const meta_text = meta_out[1];
+        t = meta_out[0] + meta_out[2];
+        
+        try {
+            meta_processed = JSON.parse(meta_text);
+        } catch (e) {
+            alert("metadata is not valid");
+        }
+    }
+    var name = "";
+    var mrn = "";
+    var nam = "";
+    
+    try {
+        name = meta_processed["name"];
+    }catch (e){
+        
+    }
+    try{
+        mrn = meta_processed["MRN"];
+    }catch (e){
+        
+    }
+    
+    
+    
+    
+    saved_patients[mrn] = {"mrn":mrn, "name":name,"time":date.toLocaleString(), "text":encodeURIComponent(document.getElementById("main_input").value)};
+    console.log(JSON.stringify(saved_patients));
+   
+    setCookie("saved_patients",JSON.stringify(saved_patients));
+
+    document.getElementById("settings").classList.remove("visible");
+    
+    alert("Patient saved!");
 }
 
 

@@ -1,4 +1,4 @@
-ADMISSION (‡)
+ADMISSION (2025-‡-‡ ‡:‡)
 <l>ID:
 
 ATCD:
@@ -19,8 +19,8 @@ RX HOSPIT:
 
 
 E/P:
-TA ‡ ; FC ‡ ; FR ‡ ; Sat ‡% AA; T‡C;
-Alerte. Pas de détresse.
+TA ‡ | FC ‡ | Sat ‡% AA | T‡C
+
 </l>
 <r>
 INVESTIGATIONS:

@@ -1,18 +1,23 @@
-‡ - NOTE ÉVOLUTION (2024-‡ ‡:‡)
+‡ - NOTE ÉVOLUTION (2025-‡-‡ ‡:‡)
 <l>ID: ‡</l>
 <r># ‡</r>
 
-<l>S:
+<l>HMA:
 ‡
 
-O:
-TA ‡ ; FC ‡ ; FR ‡ ; Sat ‡% AA; T‡C;
+E/P:
+TA ‡ | FC ‡ | Sat ‡% AA | T‡C
 
 </l>
 <r>RX:
 ‡
-INV:
+INVESTIGATIONS:
 ‡
 </r>
 IMPRESSION/PLAN:
 ‡
+<meta>{
+"name":"",
+"MRN":"",
+"NAM":""
+}</meta>

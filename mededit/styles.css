@@ -199,11 +199,18 @@ body#main{
     color: white;
     display: none;
     
+    
+    overflow-y: auto;
+    
 }
 
 #settings.visible{
     display: block;
 }
+
+
+
+
 
 
 /* PDF ************************/

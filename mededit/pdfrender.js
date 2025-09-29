@@ -134,6 +134,14 @@ const forms_options = {
         y: [552,684],
         maxLines : [40, 49],
         lineHeight: 13,
+        maxWidth: 518,
+        signature: false
+    },
+    "consult-ext":{
+        x: [48,48],
+        y: [552,684],
+        maxLines : [40, 49],
+        lineHeight: 13,
         maxWidth: 540,
         signature: false
     }

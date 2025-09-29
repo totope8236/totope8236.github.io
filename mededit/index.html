@@ -31,6 +31,7 @@
     
     
     <div id="settings">
+        <!--SETTINGS-->
         <h1>Settings</h1>
         <p>Hospital</p><select for="hospital" id="hospital">
         <option value="hdq">HDQ</option>
@@ -47,13 +48,33 @@
         <option value="progress">Progress</option>
         <option value="consultation">Consultation</option>
         <option value="sommaire">Sommaire</option>
-        <option value="externeped">Consultation Externe Ped</option>
-        <option value="progress-hdl">Progress HDL</option>
+        <option value="externeped">Consultation Externe Ped (CHUL SEULEMENT)</option>
+        <option value="progress-hdl">(AUTRE) Progress HDL</option>
+        <option value="consult-ext">(AUTRE) Consult Externe</option>
         </select>
         <br>
             <p>Signature</p><input type="text" id="signature" name="signature"><br>
             <button onclick="saveSettings()">Save</button>
+        
+        <!--SAVES-->
+        <hr>
+        <button onclick="saveCurrentPatient()">SAVE CURRENT PATIENT 💾</button>
+        
+            <ul id="save-list">
+            <li><button>Load &#128194;</button> <button style="background-color:red">DELETE &#128465;</button></li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+            <li>Item 6</li>
+            <li>Item 7</li>
+            
+            </ul>
+        
     </div>
+    
+    
+    
     
     
     <div id="settings-button" onclick="showSettings()">
