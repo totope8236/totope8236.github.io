@@ -40,8 +40,9 @@ Dispo: ‡
 Anticoagulation: ‡
 Soluté: ‡
 PRN Rx: ‡
+
 <meta>{
-"name":"",
-"MRN":"",
-"NAM":""
+"name":"‡",
+"MRN":"‡",
+"NAM":"‡"
 }</meta>

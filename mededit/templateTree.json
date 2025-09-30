@@ -1,10 +1,10 @@
 {
-  "page-template": {
-    "admission": {
+  "Types Notes": {
+    "Admission": {
       "type": "long-text",
       "src": "admission.txt"
     },
-    "progress-note":{
+    "Note-Evol":{
       "type": "long-text",
       "src": "progress-note.txt"
     },
@@ -16,34 +16,34 @@
         "type": "long-text",
         "src": "usi4n.txt"
     },
-    "consult ped": {
+    "Consult Ped": {
       "type": "long-text",
       "src": "cons-ped.txt"
     }
   },
-    "labs": {
-      "all-labs":{
+    "Labos": {
+      "Tous-Labos":{
           "type": "long-text",
           "src": "all-labs.txt"
       },
-        "Heme":{
+        "FSC":{
             "type": "short-text",
-            "value":"FSC: Hgb ‡; GB ‡ (neutro ‡); Plt ‡;\n"
+            "value":"FSC: Hgb ‡ | GB ‡ (ANC ‡) | Plt ‡\n"
         },
-        "Lytes":{
+        "E+":{
             "type": "short-text",
-            "value":"E+: Na ‡; Cl ‡; K ‡; Cr ‡ (DFG ‡); U ‡;\n    Ca ‡; Phos ‡; Mg ‡;"
+            "value":"E+: Na ‡ | Cl ‡ | K ‡ | Cr ‡ (DFG ‡) | U ‡\n    tCa ‡ | Phos ‡ | Mg ‡"
         },
         "LFTs":{
             "type": "short-text",
-            "value":"Hep: AlkP ‡; ALT ; AST ‡; GGT ‡;\n    T-bili ‡ (conj ‡); INR ‡; Alb ‡; \n"
+            "value":"Hep: AlkP ‡ | ALT ‡ | AST ‡ | GGT ‡;\n    T-bili ‡ (conj ‡) | INR ‡ | Alb ‡\n"
         },
         "Gaz":{
             "type": "short-text",
             "value": "Gaz Cap: pH ‡ / pCO2 ‡ / HCO3 ‡\nLactate: ‡"
         }
     },
-    "rds":{
+    "RDS":{
         "type": "selector",
         "title": "RDS",
         "content":{
@@ -60,7 +60,11 @@
             "ORL": ["Ørhinorrhée","Øcongestion nasale","Ømal de gorge","Øvoix rauque","Øotalgie","Øbaisse d'audition"]
         }
     },
-    "O/E":{
+    "E/P":{
+        "Signes-Vitaux":{
+            "type":"short-text",
+            "value":"TA ‡ | FC ‡ | Sat ‡% AA | T‡C\n"
+        },
         "E/P":{
             "type": "selector",
             "title": "E/P",
@@ -78,14 +82,18 @@
         }
         
     },
-    "metadata":{
-        "container-meta":{
+    "Autres":{
+        "full-hr":{
             "type":"short-text",
-            "value":"<meta></meta>"
+            "value":"         ———————————————————————————————————————————————\n"
+        },
+        "column-hr":{
+            "type":"short-text",
+            "value":"         —————————————————————\n"
         },
         "fill patient id":{
             "type":"long-text",
             "src":"basic-id.txt"
         }
     }
-}
+}   

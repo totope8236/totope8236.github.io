@@ -8,18 +8,11 @@ var date = new Date();
 date.setTime(date.getTime() + (10*24*60*60*1000));
 const expires = "; expires=" + date.toUTCString();
 function setCookie(name,value) {
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    localStorage.setItem(name,value);
 }
 
 function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
+    return localStorage.getItem(name);
 }
 
 function save_text_to_cookie() {
@@ -335,29 +328,33 @@ document.addEventListener("keydown", (e) =>{
 // ***********************
 
 function showSettings(){
-    var s = getCookie("signature");
-    if (!s){
-        s = "";
-    }
-    document.getElementById("signature").value = s;
-    
-    document.getElementById("settings").classList.add("visible");
-    
-    
+    if (document.getElementById("settings").classList.contains("visible")){
+        document.getElementById("settings").classList.remove("visible")
+    }else{
+        var s = getCookie("signature");
+        if (!s){
+            s = "";
+        }
+        document.getElementById("signature").value = s;
 
-    // Put list of patients within the list
-    
-   var saved_patients = getSavedPatientsFromCookies();
-    
-   var ids = Object.keys(saved_patients);
-    
-    const listBody = document.getElementById("save-list");
-    listBody.innerHTML = "";
-    
-    for (let i = 0; i< ids.length; i++){
-        var p = saved_patients[ids[i]];
-        listBody.innerHTML += `<li><button onclick="loadPatient('${p["mrn"]}')">Load &#128194;</button> ${p["name"]} | ${p["mrn"]} | ${p["time"]} - <button onclick="deletePatient('${p["mrn"]}')" style='background-color:red'>DELETE &#128465;</button></li>`
+        document.getElementById("settings").classList.add("visible");
+
+
+
+        // Put list of patients within the list
+       var saved_patients = getSavedPatientsFromCookies();
+
+       var ids = Object.keys(saved_patients);
+
+        const listBody = document.getElementById("save-list");
+        listBody.innerHTML = "";
+
+        for (let i = 0; i< ids.length; i++){
+            var p = saved_patients[ids[i]];
+            listBody.innerHTML += `<li><button onclick="loadPatient('${p["mrn"]}')">Load &#128194;</button> ${p["name"]} | ${p["mrn"]} | ${p["time"]} - <button onclick="deletePatient('${p["mrn"]}')" style='background-color:red'>DELETE &#128465;</button></li>`
+        }
     }
+    
     
 }
 
@@ -430,7 +427,8 @@ function saveCurrentPatient(){
         try {
             meta_processed = JSON.parse(meta_text);
         } catch (e) {
-            alert("metadata is not valid");
+            alert("metadata is not valid, saving as blank: "+e);
+            
         }
     }
     var name = "";
@@ -451,11 +449,10 @@ function saveCurrentPatient(){
     
     
     
-    saved_patients[mrn] = {"mrn":mrn, "name":name,"time":date.toLocaleString(), "text":encodeURIComponent(document.getElementById("main_input").value)};
+    saved_patients[mrn] = {"mrn":mrn, "name":name,"time":(new Date()).toLocaleString(), "text":encodeURIComponent(document.getElementById("main_input").value)};
     console.log(JSON.stringify(saved_patients));
    
     setCookie("saved_patients",JSON.stringify(saved_patients));
-
     document.getElementById("settings").classList.remove("visible");
     
     alert("Patient saved!");

@@ -1,4 +1,4 @@
-USI - MÉDECINE INTERNE
+USI
 
 ID: ‡
 
@@ -14,20 +14,20 @@ TA‡; FC ‡; Sinus; ‡ amines;
 NEPHRO:
 In ‡;  OUT ‡ (‡cc/hr);  NET  ‡;
 
-Lytes: Na ‡; Cl ‡; K ‡; Cr ‡ (DFG ‡); U ‡;
-Ca ‡; Phos ‡; Mg ‡;
+Lytes: Na ‡ | Cl ‡ | K ‡ | Cr ‡ (DFG ‡) | U ‡
+Ca ‡ | Phos ‡ | Mg ‡
 
 
 HEME:
-T‡C; (TMax‡C);
-Hgb ‡; GB ‡ (neutro ‡); Plt ‡; CRP ‡;
-INR ‡; PTT ‡;
-Rx: 
+T‡C (TMax‡C);
+Hgb ‡ | GB ‡ (neutro ‡) | Plt ‡ | CRP ‡
+INR ‡ | PTT ‡
 
 
 GI:
-glyc: ‡;
-Échelle insuline ‡;
+glyc: ‡
+Gastroprotection:
+Gavage
 
 
 NEURO:

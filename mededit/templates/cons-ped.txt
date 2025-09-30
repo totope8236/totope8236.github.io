@@ -34,7 +34,7 @@ HdV: Ø x3 |T: x ‡|EtOH: ‡|D: ‡;
 
 
 E/P: Poids: ‡ Taille: ‡  PC : ‡ 
-TA ‡ ; FC ‡ ; FR ‡ ; Sat ‡% AA; T‡C;
+TA ‡ | FC ‡ | FR ‡ | Sat ‡% AA | T‡C
 
 
 

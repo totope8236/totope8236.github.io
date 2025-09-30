@@ -1,9 +1,9 @@
-FSC: Hgb ‡; GB ‡ (ANC ‡); Plt ‡;
-CRP: ‡;
-INR: ‡; TCA: ‡;
+FSC: Hgb ‡ | GB ‡ (ANC ‡) | Plt ‡
+CRP: ‡
+INR: ‡ | TCA: ‡
 
-E+: Na ‡; Cl ‡; K ‡; Cr ‡ (DFG ‡); U ‡;
-    Ca ‡; Phos ‡; Mg ‡;
+E+: Na ‡ | Cl ‡ | K ‡ | Cr ‡ (DFG ‡) | U ‡
+    Ca ‡ | Phos ‡ | Mg ‡
 
-Gaz Cap: pH ‡ / pCO2 ‡ / HCO3 ‡;
+Gaz Cap: pH ‡ / pCO2 ‡ / HCO3 ‡
 Lactate: ‡
