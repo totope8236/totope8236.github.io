@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>GDF · Hospital documents</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm7 1.5V9h5.5L13 3.5ZM11 12v2.5H8.5v2H11V19h2v-2.5h2.5v-2H13V12h-2Z"/></svg>
+      </span>
+      <span class="brand-name">GDF</span>
+      <span class="brand-sub">Hospital documents</span>
+    </div>
+    <div id="patientChip" class="patient-chip empty">No patient entered</div>
+    <div class="topbar-note">Runs entirely in this browser · nothing is saved or sent</div>
+  </header>
+
+  <div id="fileBanner" class="banner" hidden>
+    <span>This page was opened directly from disk, so the browser won’t let it read the PDFs by itself.
+      Click <b>Choose docs folder</b> and pick the <code>gdf/docs</code> folder once (or open the site through GitHub Pages / a local server).</span>
+    <label class="btn btn-small">
+      Choose docs folder
+      <input id="folderInput" type="file" webkitdirectory directory multiple hidden>
+    </label>
+  </div>
+
+  <main class="layout">
+    <!-- ============ Patient ============ -->
+    <section class="panel patient" aria-labelledby="patientTitle">
+      <div class="panel-head">
+        <h2 id="patientTitle">Patient</h2>
+        <button id="clearPatient" class="btn btn-ghost btn-small" type="button" title="Clear all patient fields">Clear</button>
+      </div>
+
+      <div class="paste-box">
+        <textarea id="pasteInput" rows="2" spellcheck="false" autocomplete="off"
+          placeholder="Paste the patient banner (MR… DDN/DOB: …)"></textarea>
+        <div class="paste-row">
+          <span id="pasteStatus" class="paste-status" role="status" aria-live="polite"></span>
+          <button id="pasteFill" class="btn btn-small" type="button">Fill</button>
+        </div>
+      </div>
+
+      <form id="patientForm" class="pform" autocomplete="off" spellcheck="false">
+        <div class="field site-field">
+          <span class="label">Hospital site</span>
+          <div class="seg" role="radiogroup">
+            <input type="radio" name="site" id="siteRVH" value="RVH" checked><label for="siteRVH">RVH</label>
+            <input type="radio" name="site" id="siteMGH" value="MGH"><label for="siteMGH">MGH</label>
+          </div>
+        </div>
+
+        <label class="field">
+          <span class="label">MRN</span>
+          <input name="mrn" id="mrn" class="mono" inputmode="numeric">
+        </label>
+
+        <div class="row2">
+          <label class="field">
+            <span class="label">Last name</span>
+            <input name="lastName">
+          </label>
+          <label class="field">
+            <span class="label">First name</span>
+            <input name="firstName">
+          </label>
+        </div>
+
+        <div class="row2">
+          <label class="field">
+            <span class="label">Date of birth</span>
+            <input name="dob" type="date" max="2100-12-31">
+          </label>
+          <label class="field">
+            <span class="label">Sex</span>
+            <select name="sex">
+              <option value=""></option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+              <option value="X">X</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="row2 ramq-row">
+          <label class="field">
+            <span class="label">RAMQ</span>
+            <input name="ramq" class="mono" placeholder="ABCD 1234 5678" maxlength="14">
+          </label>
+          <label class="field">
+            <span class="label">RAMQ exp.</span>
+            <input name="ramqExp" class="mono" placeholder="YYYY-MM" maxlength="7">
+          </label>
+        </div>
+        <p id="ramqHint" class="hint" hidden></p>
+
+        <label class="field">
+          <span class="label">Address (number and street)</span>
+          <input name="address" placeholder="79 rue Lefebvre">
+        </label>
+
+        <div class="row2 city-row">
+          <label class="field">
+            <span class="label">City</span>
+            <input name="city" placeholder="Montréal">
+          </label>
+          <label class="field">
+            <span class="label">Province</span>
+            <input name="province" class="mono" value="QUE" maxlength="3">
+          </label>
+        </div>
+
+        <div class="row2">
+          <label class="field">
+            <span class="label">Postal code</span>
+            <input name="postalCode" class="mono" placeholder="H3A 1A1" maxlength="7">
+          </label>
+          <label class="field">
+            <span class="label">Phone</span>
+            <input name="phone" class="mono" placeholder="(514) 555-0123" inputmode="tel">
+          </label>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============ Documents ============ -->
+    <section class="panel docs" aria-labelledby="docsTitle">
+      <div class="panel-head">
+        <h2 id="docsTitle">Documents</h2>
+        <span id="resultCount" class="muted"></span>
+      </div>
+
+      <div class="search">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M10 3a7 7 0 0 1 5.6 11.2l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 1 1 10 3Zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></svg>
+        <input id="search" type="search" placeholder="Search by name, form number or tag…  ( / )" autocomplete="off" spellcheck="false">
+      </div>
+
+      <div class="table-wrap">
+        <table id="docTable">
+          <thead>
+            <tr>
+              <th class="col-check"><input type="checkbox" id="checkAll" title="Select / unselect all shown"></th>
+              <th>Document</th>
+              <th class="col-code">Form</th>
+              <th>Tags</th>
+            </tr>
+          </thead>
+          <tbody id="docBody"></tbody>
+        </table>
+        <div id="emptyState" class="empty-state" hidden>No document matches your search.</div>
+      </div>
+
+      <div class="queue">
+        <div class="queue-head">
+          <span class="label">Print queue</span>
+          <span id="queueInfo" class="muted">Tick documents to add them</span>
+          <button id="clearQueue" class="btn btn-ghost btn-small" type="button" hidden>Clear</button>
+        </div>
+        <ol id="queueList" class="queue-list"></ol>
+        <div class="queue-actions">
+          <span id="status" class="status" role="status" aria-live="polite"></span>
+          <button id="downloadBtn" class="btn" type="button" disabled>Download PDF</button>
+          <button id="printBtn" class="btn btn-primary" type="button" disabled>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M7 3h10v4H7V3Zm-2 6h14a3 3 0 0 1 3 3v5h-4v4H6v-4H2v-5a3 3 0 0 1 3-3Zm3 7v3h8v-3H8Zm10-4.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"/></svg>
+            Open for printing
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Preview ============ -->
+    <section class="panel preview" aria-labelledby="previewTitle">
+      <div class="panel-head">
+        <h2 id="previewTitle">Preview</h2>
+        <label class="toggle"><input type="checkbox" id="stampPreview" checked> Show patient stamp</label>
+      </div>
+      <div id="previewName" class="preview-name muted">Click a document to preview it</div>
+      <div class="preview-frame">
+        <iframe id="previewFrame" title="PDF preview"></iframe>
+        <div id="previewPlaceholder" class="preview-placeholder">
+          <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><path fill="currentColor" d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm7 1.5V9h5.5L13 3.5Z"/></svg>
+          <span>No document selected</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="lib/pdf-lib.min.js"></script>
+  <script src="docs/catalog.js"></script>
+  <script src="js/parse.js"></script>
+  <script src="js/formfix.js"></script>
+  <script src="js/stamp.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
