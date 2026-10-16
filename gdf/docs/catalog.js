@@ -182,7 +182,7 @@ window.GDF_CATALOG = [
     file: "ordo_comfort_care.pdf",
     title: "Pharmaceutical orders – Comfort care – Adult",
     code: "DM-6225",
-    stamp: { ...MUHC_ORDERS_LABEL, pages: [1, 2] }, // page 2 (pharmacokinetic table) has room below its name line
+    stamp: { ...MUHC_ORDERS_LABEL, pages: [1] },
     tags: [
       ...MUHC, ...ORDERS, "soins de confort", "comfort care", "soins palliatifs", "palliative", "fin de vie",
       "end of life", "SPFV", "morphine", "hydromorphone", "haloperidol", "Haldol", "lorazepam", "Ativan",
