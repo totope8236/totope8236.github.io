@@ -125,7 +125,7 @@ window.GDF_CATALOG = [
     file: "ordonnances_medicales_dm6225.pdf",
     title: "Ordonnances médicales (feuille vierge) / Medical orders (blank)",
     code: "DM-6225",
-    stamp: MUHC_ORDERS_LABEL, // single page: every page gets the label
+    stamp: { ...MUHC_ORDERS_LABEL, pages: [1] }, // page 2 is blank, no need for the label
     tags: [...MUHC, ...ORDERS, "vierge", "blank", "feuille d'ordonnances", "prescription", "Rx", "orders sheet"],
   },
   {
